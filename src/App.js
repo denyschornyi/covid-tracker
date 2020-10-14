@@ -6,6 +6,7 @@ import { FormControl, Select, MenuItem, Card, CardContent} from '@material-ui/co
 import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
+import {sortData} from './util';
 
 const url ='https://disease.sh/v3/covid-19/countries' ;
 
@@ -32,7 +33,8 @@ function App() {
               name: country.country,
               value: country.countryInfo.iso3,
           }));
-          setTableData(data);
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
