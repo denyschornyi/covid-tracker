@@ -3,6 +3,7 @@ import './App.css';
 
 import { FormControl, Select, MenuItem } from '@material-ui/core';
 
+import InfoBox from './InfoBox';
 
 const url ='https://disease.sh/v3/covid-19/countries' ;
 
@@ -50,14 +51,12 @@ function App() {
         </FormControl>
       </div>
       
+      <div className="app__stats">
+        <InfoBox title='Coronavirus cases' cases={12} total={12313}/>
+        <InfoBox title='Recovered' cases={123} total={12313}/>
+        <InfoBox title='Deaths' cases={123} total={12313}/>
+      </div>
 
-
-      {/* Header */}
-        {/* Title + Select input dropdown field */}
-      
-      {/* InfoBoxes */}
-      {/* InfoBoxes */}
-      {/* InfoBoxes */}
 
       {/* Table */}
       {/* Graph */}
