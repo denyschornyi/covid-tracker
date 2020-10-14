@@ -1,16 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
 
-import { FormControl, Select, MenuItem, Card, CardContent } from '@material-ui/core';
+import { FormControl, Select, MenuItem, Card, CardContent} from '@material-ui/core';
 
 import InfoBox from './InfoBox';
 import Map from './Map';
+import Table from './Table';
+
 const url ='https://disease.sh/v3/covid-19/countries' ;
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState('worldwide');
   const [ countryInfo, setCountryInfo] = useState({}); 
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://disease.sh/v3/covid-19/all')
+      .then((res) =>  res.json())
+      .then((data) => {
+        setCountryInfo(data); 
+      })
+  }, [])
 
   useEffect(() => {
     const getCountries = async () => {
@@ -21,19 +32,13 @@ function App() {
               name: country.country,
               value: country.countryInfo.iso3,
           }));
+          setTableData(data);
           setCountries(countries);
         });
     };
     getCountries();
   }, []);
 
-  useEffect(() => {
-    fetch('https://disease.sh/v3/covid-19/all')
-      .then((res) =>  res.json())
-      .then((data) => {
-        setCountryInfo(data); 
-      })
-  }, [])
 
   const onCounryChange = async (event) => {
     const countryCode = event.target.value;
@@ -50,7 +55,6 @@ function App() {
         setCountryInfo(data); 
       })
   }
-  console.log(countryInfo);
   return (
     <div className="app">
       <div className="app__left">
@@ -82,7 +86,7 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Coutry</h3>
-          {/* Table */}
+          <Table countries={tableData}/>
           <h3>Worldwide new cases</h3>
           {/* Graph */}
         </CardContent>
