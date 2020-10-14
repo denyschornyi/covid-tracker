@@ -7,18 +7,20 @@ import { FormControl, Select, MenuItem } from '@material-ui/core';
 const url ='https://disease.sh/v3/covid-19/countries' ;
 
 function App() {
-  const [countries, setCountries] = useState(['USA', 'UK', 'Canada', 'Poland']);
+  const [countries, setCountries] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     const getCountries = async () => {
-      const res = await fetch(url);
-
-      if(!res.ok){
-        throw new Error(`Could not fetch ${url}, recived ${res.status}`)
-      }
-
-      return await res.json(); 
-    }
+      await fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          const countries = data.map(country => ({
+              name: country.country,
+              value: country.countryInfo.iso3,
+          }));
+          setCountries(countries);
+        });
+    };
     getCountries();
   }, []);
 
@@ -33,7 +35,7 @@ function App() {
               value='abc'
             >
             {countries.map(country => (
-              <MenuItem value={country}>{country}</MenuItem>
+              <MenuItem value={country.value}>{country.name}</MenuItem>
             ))}
           </Select>
         </FormControl>
