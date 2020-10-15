@@ -6,6 +6,7 @@ import { FormControl, Select, MenuItem, Card, CardContent} from '@material-ui/co
 import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
+import LineGraph from './LineGraph';
 import {sortData} from './util';
 
 const url ='https://disease.sh/v3/covid-19/countries' ;
@@ -90,7 +91,7 @@ function App() {
           <h3>Live Cases by Coutry</h3>
           <Table countries={tableData}/>
           <h3>Worldwide new cases</h3>
-          {/* Graph */}
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
