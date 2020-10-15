@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './App.css';
+import "leaflet/dist/leaflet.css";
 
 import { FormControl, Select, MenuItem, Card, CardContent} from '@material-ui/core';
 

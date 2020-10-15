@@ -47,10 +47,10 @@ const options = {
   },
 };
 
-function LineGraph() {
+function LineGraph({casesType = 'cases'}) {
     const [data, setData] = useState({});
 
-    const buildChartData = (data, casesType = 'cases') => {
+    const buildChartData = (data) => {
         const chartData = [];
         let lastDataPoint;
 
@@ -83,14 +83,15 @@ function LineGraph() {
         <div>
             {data && data.length > 0 && (
                 <Line 
-                data={{
-                    datasets: [{
-                        backgroundColor: 'rgba(204, 16, 52, .2)',
-                        borderColor: '#cc1034',
-                        data:data
-                    }]
-                }}
-                options={options}/>
+                    options={options}
+                    data={{
+                        datasets: [{
+                            backgroundColor: 'rgba(204, 16, 52, .2)',
+                            borderColor: '#cc1034',
+                            data:data
+                        }]
+                    }}
+                />
             )}
         </div>
     )
