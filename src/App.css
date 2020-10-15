@@ -22,7 +22,9 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
+.app__title{
+  color: tomato;
+}
 .app__stats{
   display: flex;
   justify-content: space-between;
